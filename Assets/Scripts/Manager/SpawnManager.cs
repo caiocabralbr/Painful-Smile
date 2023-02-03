@@ -55,17 +55,12 @@ public class SpawnManager : MonoBehaviour
                 float distance = Random.Range(0, maxSpawnRadius);
                 spawnPosition = playerTransform.position + direction * distance;
 
-                // Verifica se a posição gerada está longe o suficiente do jogador
                 float playerDistance = Vector3.Distance(spawnPosition, playerTransform.position);
                 if (playerDistance < maxSpawnRadius / 2)
                 {
-                    // Se estiver perto, gera uma nova posição
                     i--;
                     continue;
                 }
-
-                // Instancia o objeto
-                //GameObject enemy = (GameObject)Instantiate(Resources.Load(enemyWeights[i].enemyType.ToString()), spawnPosition, Quaternion.identity);
                 EnemyPooling.instance.Spawn(spawnPosition, spawnWeights[i].type, spawnWeights[i].enemyPrefab);
 
                 break;
