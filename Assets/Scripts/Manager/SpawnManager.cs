@@ -53,9 +53,9 @@ public class SpawnManager : MonoBehaviour
             {
                 Vector3 direction = Random.insideUnitCircle.normalized;
                 float distance = Random.Range(0, maxSpawnRadius);
-                spawnPosition = playerTransform.position + direction * distance;
+                spawnPosition = transform.position + direction * distance;
 
-                float playerDistance = Vector3.Distance(spawnPosition, playerTransform.position);
+                float playerDistance = Vector3.Distance(spawnPosition, transform.position);
                 if (playerDistance < maxSpawnRadius / 2)
                 {
                     i--;

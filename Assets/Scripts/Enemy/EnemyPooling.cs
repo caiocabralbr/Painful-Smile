@@ -74,6 +74,7 @@ public class EnemyPooling : MonoBehaviour
         if (objectToUse == null)
         {
             GameObject spawn = Instantiate(enemyPrefab, position, Quaternion.identity);
+            spawn.transform.parent = transform;
             spawn.GetComponent<EnemyBoatAI>().enemyType = type;
             objectToUse = new PooledObject
             {

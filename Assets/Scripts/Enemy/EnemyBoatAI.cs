@@ -10,7 +10,9 @@ public class EnemyBoatAI : MonoBehaviour
     public EnemyType enemyType;
 
     [Header("Moviment Config")]
-    public float speed = 5f;
+    public float minSpeed = 0f;
+    public float maxSpeed = 1f;
+    public float speed = 0f;
     public float rotateSpeed = 90f;
     private Transform playerTransform;
     public float stopDistance = 2;
@@ -84,8 +86,12 @@ public class EnemyBoatAI : MonoBehaviour
             return;
         }
         Vector3 direction = (playerTransform.position - transform.position).normalized;
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        speed += Time.deltaTime;
+        speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
         rb.velocity = direction * speed;
+
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle+90), Time.deltaTime * rotateSpeed);
     }
 
@@ -104,7 +110,13 @@ public class EnemyBoatAI : MonoBehaviour
 
         if (Vector3.Distance(transform.position, playerTransform.position) >= stopDistance)
         {
-            transform.position += direction * speed * Time.deltaTime;
+            speed += Time.deltaTime;
+            speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
+            rb.velocity = direction * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         if (Vector3.Distance(transform.position, playerTransform.position) < attackRange)
