@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private float timeToDestroy = 10f;
     public float speed = 10f;
     public GameObject explosionFX;
 
@@ -12,7 +13,9 @@ public class Bullet : MonoBehaviour
         Player,
         Enemy
     }
+    private void Start() => Invoke(nameof(Destroy), timeToDestroy);
 
+    
     private void OnBecameInvisible()
     {
         BulletPooling.instance.Death(gameObject);
@@ -32,4 +35,6 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Player") && shootedBy == ShootedBy.Enemy) collision.GetComponent<BoatController>().GetHit();
         if (collision.CompareTag("Enemy") && shootedBy == ShootedBy.Player) collision.GetComponent<EnemyBoatAI>().GetHit(40);
     }
+
+    private void Destroy() => BulletPooling.instance.Death(gameObject);
 }
