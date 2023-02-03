@@ -6556,7 +6556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50400ce084bfaec4ea5d448318704183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxObjects: 10
+  maxObjects: 20
   EnemyPrefab: {fileID: 3141172327590711403, guid: 255770fd4647bef4eb9f9cd91a575a25, type: 3}
   explosionFX: {fileID: 321399513857926407, guid: cd22b46e70a71eb498e96b27e4643113, type: 3}
 --- !u!4 &339892195
@@ -6599,7 +6599,7 @@ MonoBehaviour:
   - type: 0
     weight: 5
     enemyPrefab: {fileID: 3141172327590711403, guid: 7d523a087aea4f24581bd146a3459d26, type: 3}
-  spawnTimer: 4
+  spawnTimer: 2
   maxSpawnRadius: 20
 --- !u!1001 &351893998
 PrefabInstance:
